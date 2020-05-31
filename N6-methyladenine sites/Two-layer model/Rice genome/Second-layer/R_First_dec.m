@@ -1,24 +1,65 @@
-clear 
+clear
 clc
 
-load('R_NC_dec_pos.mat'); %NC
-load('R_DNC_dec_pos.mat'); %DNC
-load('R_TNC_dec_pos.mat'); %TNC
-load('R_PSTNP_dec_pos.mat'); %BPB
-load('R_BPB_dec_pos.mat'); %ANF
-load('R_BE_dec_pos.mat'); %PSTNP
-load('R_ANF_dec_pos.mat'); %Code01
-
-x1 = R_NC_dec_pos;
-x2 = R_DNC_dec_pos;
-x3 = R_TNC_dec_pos;
-x4 = R_PSTNP_dec_pos;
-x5 = R_BPB_dec_pos;
-x6 = R_BE_dec_pos; 
-x7 = R_ANF_dec_pos;
-
-X = [x1 x2 x3 x4 x5 x6 x7];
-X1 = X(1:880,1:7);
-X2 = X(881:1760,1:7);
-
-save R_First_dec X1 X2
+k=10;
+dec_Ptrain = [];
+dec_Ntrain = [];
+dec_Ptest = [];
+dec_Ntest = [];
+for i=1:k
+    FileName = [ num2str(i) '-R_NC_dec.mat'];
+    a = load (FileName);
+    dec_Ptrain = a.Ptrain;
+    dec_Ntrain = a.Ntrain;
+    dec_Ptest = a.Ptest;
+    dec_Ntest = a.Ntest;
+    
+    FileName = [ num2str(i) '-R_DNC_dec.mat'];
+    a = load (FileName);
+    dec_Ptrain = [dec_Ptrain, a.Ptrain];
+    dec_Ntrain = [dec_Ntrain, a.Ntrain];
+    dec_Ptest = [dec_Ptest, a.Ptest];
+    dec_Ntest = [dec_Ntest, a.Ntest];
+    
+    FileName = [ num2str(i) '-R_TNC_dec.mat'];
+    a = load (FileName);
+    dec_Ptrain = [dec_Ptrain, a.Ptrain];
+    dec_Ntrain = [dec_Ntrain, a.Ntrain];
+    dec_Ptest = [dec_Ptest, a.Ptest];
+    dec_Ntest = [dec_Ntest, a.Ntest];
+    
+    FileName = [ num2str(i) '-R_PSTNP_dec.mat'];
+    a = load (FileName);
+    dec_Ptrain = [dec_Ptrain, a.Ptrain];
+    dec_Ntrain = [dec_Ntrain, a.Ntrain];
+    dec_Ptest = [dec_Ptest, a.Ptest];
+    dec_Ntest = [dec_Ntest, a.Ntest];
+    
+    FileName = [ num2str(i) '-R_BPB_dec.mat'];
+    a = load (FileName);
+    dec_Ptrain = [dec_Ptrain, a.Ptrain];
+    dec_Ntrain = [dec_Ntrain, a.Ntrain];
+    dec_Ptest = [dec_Ptest, a.Ptest];
+    dec_Ntest = [dec_Ntest, a.Ntest];
+    
+    FileName = [ num2str(i) '-R_BE_dec.mat'];
+    a = load (FileName);
+    dec_Ptrain = [dec_Ptrain, a.Ptrain];
+    dec_Ntrain = [dec_Ntrain, a.Ntrain];
+    dec_Ptest = [dec_Ptest, a.Ptest];
+    dec_Ntest = [dec_Ntest, a.Ntest];
+    
+    FileName = [ num2str(i) '-R_ANF_dec.mat'];
+    a = load (FileName);
+    dec_Ptrain = [dec_Ptrain, a.Ptrain];
+    dec_Ntrain = [dec_Ntrain, a.Ntrain];
+    dec_Ptest = [dec_Ptest, a.Ptest];
+    dec_Ntest = [dec_Ntest, a.Ntest];
+    
+    chr=[num2str(i),'-R_First_dec.mat'];
+    save(chr,'dec_Ptrain','dec_Ntrain','dec_Ptest', 'dec_Ntest');
+    dec_Ptrain = [];
+    dec_Ntrain = [];
+    dec_Ptest = [];
+    dec_Ntest = [];
+end
